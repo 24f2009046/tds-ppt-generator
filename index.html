@@ -339,19 +339,96 @@ Our innovative approach solves three key problems:
                         <label for="llmProvider">LLM Provider</label>
                         <select id="llmProvider" required>
                             <option value="">Select Provider</option>
-                            <option value="openai">OpenAI (GPT-4)</option>
-                            <option value="anthropic">Anthropic (Claude)</option>
-                            <option value="gemini">Google Gemini</option>
+                            <optgroup label="OpenAI">
+                                <option value="openai-gpt4">OpenAI GPT-4</option>
+                                <option value="openai-gpt4-turbo">OpenAI GPT-4 Turbo</option>
+                                <option value="openai-gpt35-turbo">OpenAI GPT-3.5 Turbo</option>
+                            </optgroup>
+                            <optgroup label="Anthropic">
+                                <option value="anthropic-claude35-sonnet">Claude 3.5 Sonnet</option>
+                                <option value="anthropic-claude3-opus">Claude 3 Opus</option>
+                                <option value="anthropic-claude3-sonnet">Claude 3 Sonnet</option>
+                            </optgroup>
+                            <optgroup label="Google">
+                                <option value="gemini-15-pro">Gemini 1.5 Pro</option>
+                                <option value="gemini-15-flash">Gemini 1.5 Flash</option>
+                                <option value="gemini-10-pro">Gemini 1.0 Pro</option>
+                            </optgroup>
+                            <optgroup label="Azure OpenAI">
+                                <option value="azure-openai">Azure OpenAI</option>
+                            </optgroup>
+                            <optgroup label="Local/Self-Hosted">
+                                <option value="ollama">Ollama (Local)</option>
+                            </optgroup>
+                            <optgroup label="Cloud Providers">
+                                <option value="together-ai">Together AI</option>
+                                <option value="perplexity">Perplexity</option>
+                                <option value="groq">Groq</option>
+                                <option value="cohere">Cohere</option>
+                                <option value="mistral-ai">Mistral AI</option>
+                            </optgroup>
+                            <optgroup label="Custom">
+                                <option value="openai-compatible">OpenAI-Compatible API</option>
+                                <option value="custom">Custom API</option>
+                            </optgroup>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="apiKey">
-                            API Key (never stored)
-                            <span class="tooltip">?
-                                <span class="tooltiptext">Your API key is used only for this session and never stored or logged</span>
-                            </span>
-                        </label>
-                        <input type="password" id="apiKey" placeholder="Enter your API key" required>
+
+                    <!-- Dynamic fields based on provider -->
+                    <div id="providerConfig">
+                        <!-- Standard API Key field -->
+                        <div class="form-group" id="apiKeyGroup">
+                            <label for="apiKey">
+                                API Key (never stored)
+                                <span class="tooltip">?
+                                    <span class="tooltiptext">Your API key is used only for this session and never stored or logged</span>
+                                </span>
+                            </label>
+                            <input type="password" id="apiKey" placeholder="Enter your API key" required>
+                        </div>
+
+                        <!-- Custom API URL field -->
+                        <div class="form-group" id="apiUrlGroup" style="display: none;">
+                            <label for="apiUrl">
+                                API Base URL
+                                <span class="tooltip">?
+                                    <span class="tooltiptext">Custom API endpoint URL (e.g., http://localhost:11434 for Ollama)</span>
+                                </span>
+                            </label>
+                            <input type="url" id="apiUrl" placeholder="https://api.example.com/v1">
+                        </div>
+
+                        <!-- Model selection -->
+                        <div class="form-group" id="modelGroup" style="display: none;">
+                            <label for="modelName">
+                                Model Name
+                                <span class="tooltip">?
+                                    <span class="tooltiptext">Specific model to use (e.g., llama3.1, mixtral-8x7b-32768)</span>
+                                </span>
+                            </label>
+                            <input type="text" id="modelName" placeholder="Enter model name">
+                        </div>
+
+                        <!-- Azure specific fields -->
+                        <div class="form-group" id="azureResourceGroup" style="display: none;">
+                            <label for="azureResource">Azure Resource Name</label>
+                            <input type="text" id="azureResource" placeholder="your-resource-name">
+                        </div>
+                        <div class="form-group" id="azureDeploymentGroup" style="display: none;">
+                            <label for="azureDeployment">Deployment Name</label>
+                            <input type="text" id="azureDeployment" placeholder="your-deployment-name">
+                        </div>
+
+                        <!-- Custom headers for advanced users -->
+                        <div class="form-group" id="customHeadersGroup" style="display: none;">
+                            <label for="customHeaders">
+                                Custom Headers (JSON)
+                                <span class="tooltip">?
+                                    <span class="tooltiptext">Additional headers as JSON object: {"Custom-Header": "value"}</span>
+                                </span>
+                            </label>
+                            <textarea id="customHeaders" rows="3" placeholder='{"Authorization": "Bearer token", "Custom-Header": "value"}'></textarea>
+                        </div>
                     </div>
                 </div>
 
@@ -399,16 +476,24 @@ Our innovative approach solves three key problems:
                 <p>Automatically applies colors, fonts, and layouts from your uploaded template</p>
             </div>
             <div class="feature-card">
-                <h4>🤖 AI-Powered</h4>
-                <p>Uses your choice of LLM to intelligently structure content into slides</p>
+                <h4>🤖 Universal AI Support</h4>
+                <p>Works with 10+ LLM providers including OpenAI, Anthropic, local models, and custom APIs</p>
             </div>
             <div class="feature-card">
                 <h4>📝 Flexible Input</h4>
-                <p>Supports markdown, plain text, and long-form prose content</p>
+                <p>Supports markdown, plain text, and long-form prose content with smart structuring</p>
             </div>
             <div class="feature-card">
                 <h4>🔒 Privacy First</h4>
-                <p>API keys never stored, all processing happens client-side when possible</p>
+                <p>API keys never stored, supports local models, all processing happens client-side when possible</p>
+            </div>
+            <div class="feature-card">
+                <h4>⚡ Performance Options</h4>
+                <p>Choose from ultra-fast inference (Groq) to powerful reasoning (GPT-4) based on your needs</p>
+            </div>
+            <div class="feature-card">
+                <h4>🌐 Local & Cloud</h4>
+                <p>Deploy with cloud APIs or run completely offline with Ollama and local models</p>
             </div>
         </div>
     </div>
@@ -424,9 +509,11 @@ Our innovative approach solves three key problems:
                 const form = document.getElementById('pptForm');
                 const fileInput = document.getElementById('templateFile');
                 const fileLabel = document.getElementById('fileLabel');
+                const llmProvider = document.getElementById('llmProvider');
 
                 form.addEventListener('submit', (e) => this.handleSubmit(e));
                 fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
+                llmProvider.addEventListener('change', (e) => this.handleProviderChange(e));
 
                 // Drag and drop
                 fileLabel.addEventListener('dragover', (e) => {
@@ -448,6 +535,117 @@ Our innovative approach solves three key problems:
                         this.handleFileSelect({ target: { files } });
                     }
                 });
+            }
+
+            handleProviderChange(event) {
+                const provider = event.target.value;
+                const apiUrlGroup = document.getElementById('apiUrlGroup');
+                const modelGroup = document.getElementById('modelGroup');
+                const azureResourceGroup = document.getElementById('azureResourceGroup');
+                const azureDeploymentGroup = document.getElementById('azureDeploymentGroup');
+                const customHeadersGroup = document.getElementById('customHeadersGroup');
+                const apiKeyGroup = document.getElementById('apiKeyGroup');
+                const apiKey = document.getElementById('apiKey');
+                const apiUrl = document.getElementById('apiUrl');
+                const modelName = document.getElementById('modelName');
+
+                // Reset all fields
+                apiUrlGroup.style.display = 'none';
+                modelGroup.style.display = 'none';
+                azureResourceGroup.style.display = 'none';
+                azureDeploymentGroup.style.display = 'none';
+                customHeadersGroup.style.display = 'none';
+                apiKey.placeholder = 'Enter your API key';
+
+                // Configure based on provider
+                switch (provider) {
+                    case 'ollama':
+                        apiUrlGroup.style.display = 'block';
+                        modelGroup.style.display = 'block';
+                        apiUrl.value = 'http://localhost:11434';
+                        modelName.placeholder = 'llama3.1, codellama, mistral, etc.';
+                        apiKey.placeholder = 'Not required for local Ollama (optional)';
+                        apiKey.required = false;
+                        break;
+
+                    case 'azure-openai':
+                        azureResourceGroup.style.display = 'block';
+                        azureDeploymentGroup.style.display = 'block';
+                        apiKey.placeholder = 'Azure OpenAI API Key';
+                        break;
+
+                    case 'together-ai':
+                        modelGroup.style.display = 'block';
+                        apiUrl.value = 'https://api.together.xyz';
+                        modelName.placeholder = 'meta-llama/Llama-2-70b-chat-hf, mistralai/Mixtral-8x7B-Instruct-v0.1';
+                        break;
+
+                    case 'groq':
+                        modelGroup.style.display = 'block';
+                        apiUrl.value = 'https://api.groq.com/openai/v1';
+                        modelName.placeholder = 'mixtral-8x7b-32768, llama2-70b-4096, gemma-7b-it';
+                        break;
+
+                    case 'perplexity':
+                        modelGroup.style.display = 'block';
+                        apiUrl.value = 'https://api.perplexity.ai';
+                        modelName.placeholder = 'llama-3.1-sonar-large-128k-online, llama-3.1-sonar-small-128k-chat';
+                        break;
+
+                    case 'cohere':
+                        apiUrl.value = 'https://api.cohere.ai/v1';
+                        modelName.value = 'command-r-plus';
+                        break;
+
+                    case 'mistral-ai':
+                        modelGroup.style.display = 'block';
+                        apiUrl.value = 'https://api.mistral.ai/v1';
+                        modelName.placeholder = 'mistral-large, mistral-medium, mistral-small';
+                        break;
+
+                    case 'openai-compatible':
+                        apiUrlGroup.style.display = 'block';
+                        modelGroup.style.display = 'block';
+                        customHeadersGroup.style.display = 'block';
+                        apiUrl.placeholder = 'https://your-api.com/v1';
+                        modelName.placeholder = 'your-model-name';
+                        break;
+
+                    case 'custom':
+                        apiUrlGroup.style.display = 'block';
+                        modelGroup.style.display = 'block';
+                        customHeadersGroup.style.display = 'block';
+                        apiUrl.placeholder = 'https://your-custom-api.com/endpoint';
+                        modelName.placeholder = 'custom-model-name';
+                        break;
+
+                    default:
+                        // Standard providers
+                        apiKey.required = true;
+                        if (provider.includes('openai')) {
+                            apiKey.placeholder = 'OpenAI API Key (sk-...)';
+                        } else if (provider.includes('anthropic')) {
+                            apiKey.placeholder = 'Anthropic API Key';
+                        } else if (provider.includes('gemini')) {
+                            apiKey.placeholder = 'Google AI API Key';
+                        }
+                }
+
+                // Show model group for providers that need it
+                if (provider === 'openai-compatible' || provider === 'custom' || 
+                    provider === 'together-ai' || provider === 'groq' || 
+                    provider === 'perplexity' || provider === 'mistral-ai' || 
+                    provider === 'ollama') {
+                    modelGroup.style.display = 'block';
+                }
+
+                // Show API URL for custom/self-hosted providers
+                if (provider === 'openai-compatible' || provider === 'custom' || 
+                    provider === 'ollama' || provider === 'together-ai' || 
+                    provider === 'groq' || provider === 'perplexity' || 
+                    provider === 'cohere' || provider === 'mistral-ai') {
+                    apiUrlGroup.style.display = 'block';
+                }
             }
 
             async handleFileSelect(event) {
@@ -680,43 +878,201 @@ Our innovative approach solves three key problems:
             }
 
             async callLLM(provider, apiKey, prompt) {
-                let apiUrl, headers, body;
+                const apiUrl = document.getElementById('apiUrl')?.value;
+                const modelName = document.getElementById('modelName')?.value;
+                const customHeaders = document.getElementById('customHeaders')?.value;
+                const azureResource = document.getElementById('azureResource')?.value;
+                const azureDeployment = document.getElementById('azureDeployment')?.value;
 
+                let requestUrl, headers, body;
+
+                // Parse custom headers if provided
+                let additionalHeaders = {};
+                if (customHeaders) {
+                    try {
+                        additionalHeaders = JSON.parse(customHeaders);
+                    } catch (e) {
+                        console.warn('Invalid custom headers JSON, ignoring:', e);
+                    }
+                }
+
+                // Configure based on provider type
                 switch (provider) {
-                    case 'openai':
-                        apiUrl = 'https://api.openai.com/v1/chat/completions';
+                    case 'openai-gpt4':
+                    case 'openai-gpt4-turbo':
+                    case 'openai-gpt35-turbo':
+                        const openaiModel = provider === 'openai-gpt4' ? 'gpt-4' :
+                                          provider === 'openai-gpt4-turbo' ? 'gpt-4-turbo' : 'gpt-3.5-turbo';
+                        requestUrl = 'https://api.openai.com/v1/chat/completions';
                         headers = {
                             'Authorization': `Bearer ${apiKey}`,
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            ...additionalHeaders
                         };
                         body = {
-                            model: 'gpt-4',
+                            model: openaiModel,
                             messages: [{ role: 'user', content: prompt }],
                             max_tokens: 2000
                         };
                         break;
 
-                    case 'anthropic':
-                        apiUrl = 'https://api.anthropic.com/v1/messages';
+                    case 'anthropic-claude35-sonnet':
+                    case 'anthropic-claude3-opus':
+                    case 'anthropic-claude3-sonnet':
+                        const claudeModel = provider === 'anthropic-claude35-sonnet' ? 'claude-3-5-sonnet-20240620' :
+                                          provider === 'anthropic-claude3-opus' ? 'claude-3-opus-20240229' : 'claude-3-sonnet-20240229';
+                        requestUrl = 'https://api.anthropic.com/v1/messages';
                         headers = {
                             'x-api-key': apiKey,
                             'Content-Type': 'application/json',
-                            'anthropic-version': '2023-06-01'
+                            'anthropic-version': '2023-06-01',
+                            ...additionalHeaders
                         };
                         body = {
-                            model: 'claude-3-sonnet-20240229',
+                            model: claudeModel,
                             max_tokens: 2000,
                             messages: [{ role: 'user', content: prompt }]
                         };
                         break;
 
-                    case 'gemini':
-                        apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+                    case 'gemini-15-pro':
+                    case 'gemini-15-flash':
+                    case 'gemini-10-pro':
+                        const geminiModel = provider === 'gemini-15-pro' ? 'gemini-1.5-pro' :
+                                          provider === 'gemini-15-flash' ? 'gemini-1.5-flash' : 'gemini-1.0-pro';
+                        requestUrl = `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent?key=${apiKey}`;
                         headers = {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            ...additionalHeaders
                         };
                         body = {
                             contents: [{ parts: [{ text: prompt }] }]
+                        };
+                        break;
+
+                    case 'azure-openai':
+                        if (!azureResource || !azureDeployment) {
+                            throw new Error('Azure resource name and deployment name are required');
+                        }
+                        requestUrl = `https://${azureResource}.openai.azure.com/openai/deployments/${azureDeployment}/chat/completions?api-version=2024-02-01`;
+                        headers = {
+                            'api-key': apiKey,
+                            'Content-Type': 'application/json',
+                            ...additionalHeaders
+                        };
+                        body = {
+                            messages: [{ role: 'user', content: prompt }],
+                            max_tokens: 2000
+                        };
+                        break;
+
+                    case 'ollama':
+                        const ollamaUrl = apiUrl || 'http://localhost:11434';
+                        const ollamaModel = modelName || 'llama3.1';
+                        requestUrl = `${ollamaUrl}/api/generate`;
+                        headers = {
+                            'Content-Type': 'application/json',
+                            ...additionalHeaders
+                        };
+                        if (apiKey) {
+                            headers['Authorization'] = `Bearer ${apiKey}`;
+                        }
+                        body = {
+                            model: ollamaModel,
+                            prompt: prompt,
+                            stream: false
+                        };
+                        break;
+
+                    case 'together-ai':
+                        const togetherModel = modelName || 'meta-llama/Llama-2-70b-chat-hf';
+                        requestUrl = `${apiUrl || 'https://api.together.xyz'}/v1/chat/completions`;
+                        headers = {
+                            'Authorization': `Bearer ${apiKey}`,
+                            'Content-Type': 'application/json',
+                            ...additionalHeaders
+                        };
+                        body = {
+                            model: togetherModel,
+                            messages: [{ role: 'user', content: prompt }],
+                            max_tokens: 2000
+                        };
+                        break;
+
+                    case 'groq':
+                        const groqModel = modelName || 'mixtral-8x7b-32768';
+                        requestUrl = `${apiUrl || 'https://api.groq.com/openai/v1'}/chat/completions`;
+                        headers = {
+                            'Authorization': `Bearer ${apiKey}`,
+                            'Content-Type': 'application/json',
+                            ...additionalHeaders
+                        };
+                        body = {
+                            model: groqModel,
+                            messages: [{ role: 'user', content: prompt }],
+                            max_tokens: 2000
+                        };
+                        break;
+
+                    case 'perplexity':
+                        const perplexityModel = modelName || 'llama-3.1-sonar-large-128k-online';
+                        requestUrl = `${apiUrl || 'https://api.perplexity.ai'}/chat/completions`;
+                        headers = {
+                            'Authorization': `Bearer ${apiKey}`,
+                            'Content-Type': 'application/json',
+                            ...additionalHeaders
+                        };
+                        body = {
+                            model: perplexityModel,
+                            messages: [{ role: 'user', content: prompt }],
+                            max_tokens: 2000
+                        };
+                        break;
+
+                    case 'cohere':
+                        requestUrl = `${apiUrl || 'https://api.cohere.ai/v1'}/chat`;
+                        headers = {
+                            'Authorization': `Bearer ${apiKey}`,
+                            'Content-Type': 'application/json',
+                            ...additionalHeaders
+                        };
+                        body = {
+                            model: modelName || 'command-r-plus',
+                            message: prompt,
+                            max_tokens: 2000
+                        };
+                        break;
+
+                    case 'mistral-ai':
+                        const mistralModel = modelName || 'mistral-large-latest';
+                        requestUrl = `${apiUrl || 'https://api.mistral.ai/v1'}/chat/completions`;
+                        headers = {
+                            'Authorization': `Bearer ${apiKey}`,
+                            'Content-Type': 'application/json',
+                            ...additionalHeaders
+                        };
+                        body = {
+                            model: mistralModel,
+                            messages: [{ role: 'user', content: prompt }],
+                            max_tokens: 2000
+                        };
+                        break;
+
+                    case 'openai-compatible':
+                    case 'custom':
+                        if (!apiUrl) {
+                            throw new Error('API URL is required for custom providers');
+                        }
+                        requestUrl = `${apiUrl}/chat/completions`;
+                        headers = {
+                            'Authorization': `Bearer ${apiKey}`,
+                            'Content-Type': 'application/json',
+                            ...additionalHeaders
+                        };
+                        body = {
+                            model: modelName || 'default',
+                            messages: [{ role: 'user', content: prompt }],
+                            max_tokens: 2000
                         };
                         break;
 
@@ -724,25 +1080,51 @@ Our innovative approach solves three key problems:
                         throw new Error('Unsupported LLM provider');
                 }
 
-                const response = await fetch(apiUrl, {
+                const response = await fetch(requestUrl, {
                     method: 'POST',
                     headers,
                     body: JSON.stringify(body)
                 });
 
                 if (!response.ok) {
-                    throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+                    const errorText = await response.text();
+                    throw new Error(`API request failed: ${response.status} ${response.statusText}\n${errorText}`);
                 }
 
                 const data = await response.json();
 
+                // Parse response based on provider
                 switch (provider) {
-                    case 'openai':
+                    case 'openai-gpt4':
+                    case 'openai-gpt4-turbo':
+                    case 'openai-gpt35-turbo':
+                    case 'together-ai':
+                    case 'groq':
+                    case 'perplexity':
+                    case 'mistral-ai':
+                    case 'openai-compatible':
+                    case 'custom':
                         return data.choices[0].message.content;
-                    case 'anthropic':
+                    
+                    case 'anthropic-claude35-sonnet':
+                    case 'anthropic-claude3-opus':
+                    case 'anthropic-claude3-sonnet':
                         return data.content[0].text;
-                    case 'gemini':
+                    
+                    case 'gemini-15-pro':
+                    case 'gemini-15-flash':
+                    case 'gemini-10-pro':
                         return data.candidates[0].content.parts[0].text;
+                    
+                    case 'azure-openai':
+                        return data.choices[0].message.content;
+                    
+                    case 'ollama':
+                        return data.response;
+                    
+                    case 'cohere':
+                        return data.text;
+                    
                     default:
                         throw new Error('Unknown provider response format');
                 }
