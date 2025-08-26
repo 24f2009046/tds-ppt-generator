@@ -8,7 +8,7 @@ A web application that transforms bulk text, markdown, or prose into fully forma
 
 ## ✨ Features
 
-- **AI-Powered Content Structuring**: Uses OpenAI, Anthropic Claude, or Google Gemini to intelligently break down text into slides
+- **Universal AI Support**: Works with 10+ LLM providers including OpenAI, Anthropic, Google, Azure, local models, and custom APIs
 - **Template Style Matching**: Automatically applies colors, fonts, and layouts from uploaded PowerPoint templates
 - **Flexible Input**: Supports markdown, plain text, and long-form prose
 - **Privacy First**: API keys are never stored or logged - all processing happens client-side when possible
@@ -58,6 +58,13 @@ The template processing system extracts and applies visual elements through:
   - **OpenAI**: Get your API key from [OpenAI Platform](https://platform.openai.com/api-keys)
   - **Anthropic**: Get your API key from [Anthropic Console](https://console.anthropic.com/)
   - **Google Gemini**: Get your API key from [Google AI Studio](https://makersuite.google.com/)
+  - **Azure**: Get your API key from [portal.azure.com](https://portal.azure.com)
+  - **Together**: Get your API key from [api.together.xyz](https://api.together.xyz)
+  - **Groq**: Get your API key from [console.groq.com](https://console.groq.com)
+  - **Perplexity**: Get your API key from [docs.perplexity.ai](https://docs.perplexity.ai)
+  - **Cohere**: Get your API key from [dashboard.cohere.ai](https://dashboard.cohere.ai)
+  - **Mistral**: Get your API key from [console.mistral.ai](https://console.mistral.ai)
+
 
 ### Local Development
 
@@ -183,5 +190,3 @@ Expected revenue growth over next 3 years...
 4. Submit a pull request with a clear description
 
 ---
-
-Made with ❤️ for the open source community
