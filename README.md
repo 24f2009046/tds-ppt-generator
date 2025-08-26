@@ -4,7 +4,7 @@ A web application that transforms bulk text, markdown, or prose into fully forma
 
 ## 🚀 Demo
 
-**Live Demo:** 
+**Live Demo:** [https://24f2009046.github.io/tds-ppt-generator/](https://24f2009046.github.io/tds-ppt-generator/)
 
 ## ✨ Features
 
